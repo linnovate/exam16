@@ -1,3 +1,27 @@
+$(document).ready(function () {
+   
+    for (var i = 0; i<tree.length ; i++) {
+        if (i == 0)
+        {
+            $("#list").append('<li  id=' + (i + 1) + '>' + tree[i].title + '</li>');
+        }
+        $('#' + (i + 1)).append('<ul  id=' + i + 1 + '>');
+        
+        for (var j = 0; j < tree.length; j++) {
+            if (tree[j].parentID == tree[i].id) {
+               
+                $('#' + i + 1).append('<li  id=' + (j + 1) + '>' + tree[j].title + '</li>');              
+            }
+            if (tree[j].gender == 'male') 
+                $('#' + (j + 1)).addClass("male");
+            else $('#' + (j + 1)).addClass("female");
+        }
+        $("#list").append(+  + '</ul>');
+       
+    }
+    
+});
+
 var tree = [
 {
 	id : 1,
@@ -173,3 +197,4 @@ var tree = [
 	parentID: 2,
 	gender: "male"
 }];
+
