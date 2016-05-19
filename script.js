@@ -173,3 +173,40 @@ var tree = [
 	parentID: 2,
 	gender: "male"
 }];
+$(document).ready(function () {
+
+
+    var num = 0;
+    var moneId = 0;
+    var findPerents = tree.filter(filterByParentID);
+    var root = $("<li id=" + moneId + "></li>").text(findPerents[0].title);
+    $("#list").append(root);
+    func(findPerents,1,0);
+
+
+    function func(findPerents, numF) {
+        num= numF ;
+        var findChild = tree.filter(filterByParentID);
+        if (findChild.length == 0)
+            return;
+        var m = moneId;
+        var rootchild = $("<ul id=" + ++moneId + "></ul>");
+        $("#" + (moneId - 1)).append(rootchild);
+        for (var i = 0; i < findChild.length; i++) {
+            var rootchild1 = $("<li id=" + ++moneId + "></li>").text(findChild[i].title +" "+ findChild[i].gender);   
+            $("#" + (moneId - 1)).append(rootchild1);
+            func(findChild[i], findChild[i].id);
+            //ברעיון צריך לכל הבנים של כל אבא להוסיף  קלס  ומזהה יחודי לכל הילדים שלו חבל שלא נותר לי זמן
+            moneId = m+1;
+            
+        }
+    }
+function filterByParentID(obj) {
+    //if ('parentID' in obj && typeof (obj.parentID) === 'number' && obj.id == 0) {
+    if (obj.parentID == num) {
+        return 1;
+     return 0;
+    }
+}
+});
+
