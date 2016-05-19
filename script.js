@@ -1,3 +1,4 @@
+alert('sari');
 var tree = [
 {
 	id : 1,
@@ -173,3 +174,24 @@ var tree = [
 	parentID: 2,
 	gender: "male"
 }];
+function GetChild(id) {
+    for( var x:)
+
+    }
+function Tree(){
+    document.getElementById('list').innerHTML+=
+}
+
+
+function func(a, b) {
+    for (var i = 0; i < arguments.length; i++)
+        alert(arguments[i] + " ");
+
+
+
+    var x = 10;
+
+    alert(a + " " + b);
+
+    return x;
+}

@@ -1,13 +1,45 @@
-<html lang="en">
+﻿<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Exam 16</title>
+    <script src="jquery-1.10.2.intellisense.js"></script>
+    <script src="jquery-1.10.2.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var i = 0;
+            var m = 0, j = 0;
+            for (i = 0; i < tree.length; i++) {
+                    $("#list").append('<ul>' + tree[i].title + "</ul>");
+                 for (j = 0; j < tree.length; j++) {
+                    if (tree[j].parentID == tree[i].id) {
+                            $("#list").append('<li>' + tree[j].title + "</li>");
+
+
+                        for (k = 0; k < tree.length; k++) {
+                            if (tree[k].parentID == tree[j].id)
+                                
+                                    $("#list").append('<ul><li>' + tree[k].title + "</ul></li>"); 
+                        }
+                    }
+                }
+            }
+        });
+        
+
+
+
+
+
+    </script>
   <link href="style.css" rel="stylesheet"> 
 </head>
-<body> 
+<body onload="Tree()"> 
 	<div>Hello World ! </div>
-	<ul id="list">
+
+	<ul id="list">MyFamiliy
+     
 	</ul>
+   
 </body>
 <script src="script.js"></script>
 </html>
