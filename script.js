@@ -173,3 +173,35 @@ var tree = [
 	parentID: 2,
 	gender: "male"
 }];
+
+$(document).ready(function () {
+   
+    var a = 0;
+    var root = $("#list");
+    func(root,a);
+
+    function func(root, a) {
+        if (a == tree.length)
+            return;
+        root.append("<li>" + tree[a].title + "</li>");
+        for (var i = 0; i < tree.length; i++) {
+            if (tree[a].id == tree[i].parentID) {
+                tree[i].attr("id", "tree[i].id");
+                $("#" + tree[i].id).append("<ul>" + tree[i].title + "</ul>");
+                func($("#" + tree[i].id), a);
+            }
+        }
+        a++;        
+    }
+    
+  
+    //for (var i = 0; i < tree.length; i++) {
+    //    $("#list").append("<li>"+tree[i].title+"</li>");
+    //    for (var j = 0; j < tree.length; j++) {
+    //        if (tree[j].parentID == tree[i].id) {
+    //            $("li").append("<ul>" + tree[j].title + "</ul>");
+    //        }           
+    //    }
+    //}
+
+});
