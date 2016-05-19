@@ -1,3 +1,19 @@
 body div {
 	color: red;
 }
+.female{
+    color:pink;
+}
+.male{
+    color:blue;
+}
+.cube01 { width: 175px; height: 175px; }
+.cube01 > * { background: rgba(0, 128, 255, 0.4); }
+<ul class="qube cube01">
+  <li class="front"></li>
+  <li class="left"></li>
+  <li class="back"></li>
+  <li class="right"></li>
+  <li class="top"></li>
+  <li class="bottom"></li>
+</ul>
