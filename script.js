@@ -173,3 +173,74 @@ var tree = [
 	parentID: 2,
 	gender: "male"
 }];
+
+
+//var nodes = [
+//    {
+//        "id": "12",
+//        "parentId": "0",
+//        "text": "Man",
+//        "level": "1",
+//        "children": null
+//    }, { /*...*/ }];
+
+var map = {}, node, roots = [];
+for (var i = 0; i < tree.length; i += 1) {
+    node = tree[i];
+    node.children = [];
+    map[node.id] = i; // use map to look-up the parents
+    if (node.parentID != 0) {
+        tree[map[node.parentID]].children.push(node);
+    } else {
+        roots.push(node);
+    }
+}
+console.log(roots); // <-- there's your tree
+
+
+function to_ul(obj) {
+    var i, li, g, list = document.createElement("ul");
+    
+    for (i = 0; i < obj.length; i++) {
+        if (obj[i].gender == "male")
+            g = " M";
+        else g = " F";
+
+        document.getElementById('list').innerHTML += '<ul>' + obj.title + g + '</ul>';
+        
+        li = document.createElement("li");
+        li.appendChild(document.createTextNode(obj[i].title));
+        
+        if (obj[i]) {
+            li.appendChild(to_ul(obj[i].children));
+            document.getElementById('list').innerHTML += '<li>' + obj[i].title + g + '</li>';
+        }
+        list.appendChild(li);
+    }
+    return list;
+}
+
+
+function to_ul2(branches) {
+    var list = document.createElement("ul");
+
+    for (var i = 0; i < branches.length; i++) {
+        var branch = branches[i];
+        var li = document.createElement("li");
+
+        var text = document.createTextNode(branch.title);
+        li.appendChild(text);
+
+        if (branch.branches) {
+            document.getElementById('list').innerHTML += '<ul>' + text + '</ul>';
+            li.appendChild(to_ul2(branch.branches));
+        }
+        document.getElementById('list').innerHTML += '<li>' + text + '</li>';
+        list.appendChild(li);
+    }
+    return list;
+}
+
+function renderTree() {
+    to_ul(roots);
+}
