@@ -1,3 +1,10 @@
 body div {
 	color: red;
 }
+
+#list {
+    font-family: AlphaBlack;
+    font-size: medium;
+}
+/*.c1 { width: 120px; height: 120px; }
+.c2 > * { background-image: url(brick.png); }*/
