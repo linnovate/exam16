@@ -1,3 +1,7 @@
-body div {
+body
+ div {
 	color: red;
+    
 }
+.pink{background-color:pink;}
+.blue{background-color:blue;}
