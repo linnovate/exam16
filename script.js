@@ -1,4 +1,6 @@
-var tree = [
+$("#document").ready(function () {
+
+    var tree = [
 {
 	id : 1,
 	title: "Alex",
@@ -140,7 +142,7 @@ var tree = [
 {
 	id : 24,
 	title: "Charles",
-	parentID: 6,
+	parentID: 23,
 	gender: "male"
 },
 {
@@ -173,3 +175,54 @@ var tree = [
 	parentID: 2,
 	gender: "male"
 }];
+    parents = [];
+    for (var i = 0; i < tree.length; i++)//find the first parents(that have no parent)
+    {
+        if (!tree[i].parentID) {
+            parents.push({ id: tree[i].id, title: tree[i].title,gender:tree[i].gender ,children: [] });
+        }
+
+    }
+    for (var i = 0; i < parents.length; i++) {
+        $("#main").append("<li class=' " + parents[i].gender + "' >" + parents[i].title + "<ul  id='" + parents[i].id + "'></ul></li>");
+
+        parents[i].children = getChildren(parents[i].id);
+
+    }
+    function getChildren(parentID)
+    {
+
+        var children = [];
+        for (var i = 0; i < tree.length; i++) {
+
+            if (tree[i].parentID == parentID)//finding a child;
+            {2
+            $("#" + parentID).append("<li class=' " + tree[i].gender + "'>" + tree[i].title + "<ul  id='" + tree[i].id + "'></ul></li>")
+                children.push({ id: tree[i].id, title: tree[i].title, children: getChildren(tree[i].id) });
+            }
+        }
+        return children;
+    }
+    //addition: option to click on the tree's item in order to open and close the sons
+    //$('li').children().hide();
+    //$('li').addClass('plus');
+    //$('li').click(function (event) {
+    //    event.stopPropagation();
+    //    var $t = $(this);
+    //    if ($t.is('.plus')) {
+    //        $t.children().show();
+    //        $t.removeClass('plus');
+    //        $t.addClass('minus');
+    //    }
+    //    else {
+    //        $t.children().hide();
+    //        $t.removeClass('minus');
+    //        $t.addClass('plus');
+
+    //    }
+
+
+    //});
+   
+})
+  
