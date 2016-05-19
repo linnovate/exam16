@@ -1,3 +1,4 @@
+$(document).ready(function () {
 var tree = [
 {
 	id : 1,
@@ -173,3 +174,51 @@ var tree = [
 	parentID: 2,
 	gender: "male"
 }];
+
+
+    build = [];
+    for (var i=0; i < tree.length; i++)
+    {
+        if (tree[i].parentID==0) {
+            build.push({ id: tree[i].id, title: tree[i].title, child: [] });
+        }
+
+    }
+    for (var i=0; i < build.length; i++)
+    {
+        $("#list").append("<li id='li-"+build[i].id+"'>" + build[i].title + "<ul id='" + build[i].id +"'></ul></li>");
+        if (build[i].gender == "male")
+          $("#li-"+build[i].id).css('backcolor', 'red');
+
+
+        build[i].child = reqorsia(build[i].id);
+       
+    }
+    function reqorsia(parentID)
+    {
+      
+        var child = [];
+        for (var i = 0; i < tree.length; i++) {
+
+            if (tree[i].parentID == parentID)
+            {
+               
+                $("#" + parentID).append("<li>" + tree[i].title + "<ul id='" + tree[i].id + "'></ul></li>")
+                if ("#li-" + parentID == "male") {
+                    $("#" + parentID).attr("class", "male");
+                    $("#" + parentID).addclass("male");
+                    $('.male').css({ "font-size": "200%" });
+                }
+                child.push({ id: tree[i].id, title: tree[i].title, child: reqorsia(tree[i].id) });
+            }
+        }
+        return child;
+    }
+
+    });
+
+  
+  
+
+
+
