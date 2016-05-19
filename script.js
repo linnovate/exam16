@@ -1,3 +1,4 @@
+
 var tree = [
 {
 	id : 1,
@@ -173,3 +174,34 @@ var tree = [
 	parentID: 2,
 	gender: "male"
 }];
+
+
+var parent = tree[0];
+addChild(tree[0]);
+build(parent);
+function build(parent) {
+    var d = 0;
+
+    for (var i = 1; i < tree.length; i++) {
+        par = document.getElementById(tree[i].parentID);
+        if (par)
+                addChild(tree[i]);
+            }
+      
+    }
+
+function addChild( p)
+{
+    var child = document.createElement('li');
+    var title = document.createTextNode(p.title);
+    child.setAttribute("id", p.id);
+    child.appendChild(title);
+    if (p.gender == "female")
+          child.style.color = "hotpink"; 
+    child.setAttribute("id", p.id);
+    if (p.parentID== 0)
+        var element = document.getElementById("list");
+    else var element = document.getElementById(p.parentID);
+   
+    element.appendChild(child);
+}
