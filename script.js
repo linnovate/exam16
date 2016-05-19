@@ -173,3 +173,69 @@ var tree = [
 	parentID: 2,
 	gender: "male"
 }];
+
+
+function addtree()
+{
+    for (var i in tree)
+    {
+        var addul = document.createElement("ul");
+        addul.setAttribute("id","ul"+tree[i].parentID);
+        //////////////הכנת צומת
+        var addli = document.createElement("li");
+        addli.setAttribute("id", "li" + tree[i].id);
+        var text = document.createTextNode(tree[i].title );
+        addli.appendChild(text);
+        //חיפוש האם יש אבא
+        var p = document.getElementById("li" + tree[i].parentID);
+        if (p == null) {//יצירת האבא הראשון
+            addul.appendChild(addli);
+            document.getElementById("list").appendChild(addul)
+        }
+        else {//אם יש אבא, האוביקט מוסף כבן
+            var u = document.getElementById("ul" + tree[i].parentID);
+            if(u!=null)
+            {//אם לאבא כבר יש בנים
+                document.getElementById("ul" + tree[i].parentID).appendChild(addli);
+            }
+            else {//אם אין לו בנים עדיין
+                addul.appendChild(addli);
+                p.appendChild(addul);
+            }
+        }
+
+
+        //document.getElementById("li"+tree[i].id).addEventListener("click", function () {
+        //    var p = document.createElement("p");
+        //    var txt = document.createTextNode();
+        //    for (var c in tree) {
+        //        if (tree[c].parentID == tree[i].id)
+        //            txt += " " + tree[c].title;
+        //    }
+        //    p.appendChild(txt);
+            
+        //    document.getElementById("children").appendChild(p);
+        //});
+    }
+}
+var flag = 0;
+function showMaleFemale()
+{
+    if (flag) {
+        for (var i in tree) {
+            document.getElementById("li" + tree[i].id).style.color = "rgb(27, 112, 246)";
+        }
+        flag = 0;
+    }
+    else { flag = 1; 
+    for (var i in tree)
+    {
+        if (tree[i].gender == "male") {
+            document.getElementById("li" + tree[i].id).style.color = "black";
+        }
+        else {
+            document.getElementById("li" + tree[i].id).style.color = "deeppink";
+        }
+    }
+   }
+    }
