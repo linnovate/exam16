@@ -1,3 +1,4 @@
+
 var tree = [
 {
 	id : 1,
@@ -173,3 +174,27 @@ var tree = [
 	parentID: 2,
 	gender: "male"
 }];
+$(document).ready(function () {
+    var i, j;
+    var parents = tree.filter(function (node) { return node.parentID == 0 })
+    for (i = 0; i < parents.length; i++)
+    addSon(parents[i], document.getElementById('list'))
+});
+function addSon(father, someone) {
+    var parent = document.createElement("LI");
+    var text = document.createTextNode(father.title);
+    parent.appendChild(text);
+    if (father.gender == "male")
+        parent.setAttribute("style", "color: red;");
+    else
+        parent.setAttribute("style", "color: blue;");
+    parent.setAttribute("Text", father.id);
+    for (var j = 0; j < tree.length; j++) {
+        var son = document.createElement("UL");
+        if (tree[j].parentID == father.id) {
+            addSon(tree[j], son);
+            parent.appendChild(son);
+        }
+        someone.appendChild(parent);
+    }
+}
