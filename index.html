@@ -1,13 +1,27 @@
-<html lang="en">
+﻿<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Exam 16</title>
-  <link href="style.css" rel="stylesheet"> 
+
+  <script src="jquery-1.9.1.min.js"></script>
+  <script src="script.js"></script>
+    <link href="StyleSheet.css" rel="stylesheet" /> 
+
 </head>
 <body> 
-	<div>Hello World ! </div>
+    <div class="flip-container" >
+        <!--ontouchstart="this.classList.toggle('hover');"-->
+        <div class="flipper">
+            <div class="front">
+                <ul id="list"></ul> 
+               
+            </div>
+            <div class="back">
+                <div style="margin:200px">Hello You should move the mouse on me!!! </div><!-- front content --> <!-- back content -->
+            </div>
+        </div>
+    </div>
 	<ul id="list">
 	</ul>
 </body>
-<script src="script.js"></script>
 </html>

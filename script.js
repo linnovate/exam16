@@ -1,3 +1,4 @@
+
 var tree = [
 {
 	id : 1,
@@ -173,3 +174,57 @@ var tree = [
 	parentID: 2,
 	gender: "male"
 }];
+
+
+    jQuery( document ).ready(function($) {       
+        var hirarchy = function () {
+            var source = [];
+            var items = [];    
+
+            for (i = 0; i < tree.length; i++) {
+                var item = tree[i];
+                var label = item["title"];
+                var parentid = item["parentID"];
+                var id = item["id"];
+                var gender = item["gender"];
+
+                if (items[parentid]) {
+                    var item = { parentid: parentid, label: label, gender: gender, item: item };
+                    if (!items[parentid].items) {
+                        items[parentid].items = [];
+                    }
+                    items[parentid].items[items[parentid].items.length] = item;
+                    items[id] = item;
+                }
+                else {
+                    items[id] = { parentid: parentid, label: label,  gender: gender,item: item };
+                    source[id] = items[id];
+                }
+            }
+            return source;
+        }
+        var source = hirarchy();
+        var buildUL = function (parent, items) {
+            $.each(items, function () {
+                if (this.label) {
+                    // create LI element and append it to the parent element.
+                    var li = $("<li>" + this.label + "</li>");
+                    li.addClass(this.gender);
+                    li.appendTo(parent);
+                    // if there are sub items, call the buildUL function.
+                    if (this.items && this.items.length > 0) {
+                        var ul = $("<ul></ul>");
+                        ul.appendTo(li);
+                        buildUL(ul, this.items);
+                    }
+                }
+            });
+        }
+        var ul = $("<ul></ul>");
+        ul.appendTo("#list");
+        buildUL(ul, source);
+    });
+
+
+
+
