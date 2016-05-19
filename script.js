@@ -173,3 +173,32 @@ var tree = [
 	parentID: 2,
 	gender: "male"
 }];
+$(document).ready(function () {
+    
+    $("#body").html(build(0, document.getElementById('list')));
+    
+})
+document.getElementById('li').setAttribute('list-style-image')
+var cuurentId=0;
+function build(id, treeNode) {
+    cuurentId = id;
+    var childTree = tree.filter(function (node) { return node.parentID == cuurentId });
+    if (childTree == null || childTree.length == 0)
+        return;
+    for (var i = 0; i < childTree.length; i++)
+    {
+        var li = document.createElement("LI");
+        var node = document.createElement("UL"); 
+        var textnode = document.createTextNode(childTree[i].title);  // Create a text node
+        li.appendChild(textnode);
+        myid = childTree[i].id;
+        li.appendChild(node);
+        build(childTree[i].id, node)
+        if (treeNode != null)
+            treeNode.appendChild(li);
+    }
+    
+}
+
+
+
