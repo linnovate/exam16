@@ -173,3 +173,57 @@ var tree = [
 	parentID: 2,
 	gender: "male"
 }];
+
+
+function load() {
+    var t = tree;
+ function convert(tr) {
+        var map = {};
+        for (var i = 0; i < tr.length; i++) {
+            var obj = tr[i];
+            obj.items = [];
+
+            map[obj.id] = obj;
+
+            var parentID = obj.parentID || 0;
+            if (!map[parentID]) {
+                map[parentID] = {
+                    items: []
+                };
+            }
+            map[parentID].items.push(obj);
+        }
+        return map[0].items;
+    }
+ var r = convert(t);
+ var html = '';
+ html = buildTree(r, html);
+ document.getElementById('list').innerHTML = html;
+
+
+}
+
+
+
+
+function buildTree(data, html)
+{
+    
+    for (var i = 0; i < data.length ;i++)
+    {
+        html += '<li>';
+        html += '<b> name: </b>' + data[i].title +
+            '<b> parentID: </b>' + data[i].parentID + '<b> gender: </b>';
+        if(data[i].gender == "male")
+            html += '&nbsp;<p class="mCircle"></p>';
+        else html += '&nbsp;<p class="fCircle"></p>';
+        if (data[i].items.length > 0) {
+            html += '<ul>';
+            html = buildTree(data[i].items, html);
+            html += '</ul>';
+        }
+
+        html += '</li>';
+    }
+    return html;
+}
