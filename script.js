@@ -1,3 +1,60 @@
+$(document).ready(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+});
+window.onload = function () {
+    var idToNodeMap = {};
+    var root = null;
+    for (var i = 0; i < tree.length; i++) {
+        var datum = tree[i];
+        datum.children = [];
+        idToNodeMap[datum.id] = datum;
+        if (datum.parentID == 0) {
+            root = datum;
+        } else {
+            parentNode = idToNodeMap[datum.parentID];
+            parentNode.children.push(datum);
+        }
+    }
+    processTree(root, document.getElementById("list"),Math.floor((Math.random() * 16) + 1).toString());
+}
+    function processTree(node, element,color) {
+        var li = document.createElement('li');
+        li.style.color = "#" + color;
+        li.innerText = node.title;
+        var div = document.createElement('div');
+        li.title = "id :" + node.id + ", parentID: " + node.parentID + ", gender: " + node.gender;
+        li.setAttribute("data-toggle","tooltip");
+        element.appendChild(li);
+        if (node.children.length) {
+            var ul = document.createElement('ul');
+            li.appendChild(ul);
+            color=(parseInt(color, 16) + Math.floor((Math.random() * 160000) + 1)).toString();
+            for (var i = 0; i < node.children.length; i++) {
+                processTree(node.children[i], ul, color);
+            }
+        }
+    }
+
+function getTreeHTML(node) {
+    var html = "";
+    if (node.parentID == 0)
+        html += '<ul>';
+
+    html += '<li>';
+    html += node.name;
+    if (node.children.length > 0) {
+        html += '<ul>';
+        for (var i in node.children) {
+            html += getTreeHTML(node.children[i]);
+        }
+        html += '</ul>';
+    }
+    html += '</li>';
+
+    if (node.parentID == 0)
+        html += '</ul>';
+    return html;
+}
 var tree = [
 {
 	id : 1,

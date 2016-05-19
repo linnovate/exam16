@@ -1,3 +1,29 @@
-body div {
-	color: red;
+body div nav{
+    margin:0;
+    font-size:x-large;
+    font-family:Bejerano;
+}
+.body{
+    height:90%;
+    width:90%;
+    background-color:#c4e466;
+}
+.body:hover{
+    background-color:#defb88;
+}
+.header{
+    height:10%;
+    background-color:#88ad1d;
+    font-size:xx-large;
+    color:white;
+}
+nav{
+    background-color:#a5a5a5;
+    color:white;
+    float:right;
+    position:absolute;
+    top:0;
+    right:0;
+    width:10%;
+    height:100%;
 }
