@@ -1,3 +1,39 @@
 body div {
 	color: red;
 }
+#b1{
+    background:#75980E;
+}
+#b2{
+    color:#76077b;
+}
+body h1 {
+	color: #E40D65;
+        font-style: italic;
+            text-align: center;
+                font-family: Cooper Black;
+                    background-color: rgba(154, 30, 89, 0.46);
+                    text-shadow:2px 2px 2px rgba(154, 30, 89, 0.46);
+}
+
+.male{
+   font-family:Bodoni MT Black;
+   color:#75980E;
+       font-style: oblique;
+       font-size:20px;
+       text-shadow:1px 1px 1px #75980E;
+  
+}
+.female{
+    font-family:Bodoni MT Black;
+         font-style: oblique;
+    color:#76077b;
+    font-size:20px;
+     text-shadow:1px 1px 1px #76077b;
+    
+}
+
+
+
+
+

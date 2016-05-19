@@ -173,3 +173,57 @@ var tree = [
 	parentID: 2,
 	gender: "male"
 }];
+jQuery(document).ready(function ($) {
+    var hirarchy = function () {
+        var source = [];
+        var items = [];
+
+        for (i = 0; i < tree.length; i++) {
+            var item = tree[i];
+            var label = item["title"];
+            var parentid = item["parentID"];
+            var id = item["id"];
+            var gender = item["gender"];
+
+            if (items[parentid]) {
+                var item = { parentid: parentid, label: label, item: item, gender: gender };
+                if (!items[parentid].items) {
+                    items[parentid].items = [];
+                }
+                items[parentid].items[items[parentid].items.length] = item;
+                items[id] = item;
+            }
+            else {
+                items[id] = { parentid: parentid, label: label, item: item ,gender:gender};
+                source[id] = items[id];
+            }
+        }
+        return source;
+    }
+    var source = hirarchy();
+    var buildUL = function (parent, items) {
+        $.each(items, function () {
+            if (this.label) {
+               
+                //var li = $("<li>" + this.label + "</li>");
+                if (this.gender == "male")
+                    var li = $("<li>" + this.label + "</li>").addClass("male");
+                else
+                    var li = $("<li>" + this.label + "</li>").addClass("female");
+             
+                li.appendTo(parent);
+
+                if (this.items && this.items.length > 0) {
+                    var ul = $("<ul></ul>");
+                    ul.appendTo(li);
+                    buildUL(ul, this.items);
+                }
+            }
+            if(this.gender=="female")
+            { $(this).addClass("female")}
+        });
+    }
+    var ul = $("<ul></ul>");
+    ul.appendTo("#list");
+    buildUL(ul, source);
+});
