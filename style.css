@@ -1,3 +1,16 @@
-body div {
-	color: red;
+body {
+    font-family:Calibri;
+        font-size:20px;
+	
+}
+#list{
+    margin-left:20%;
+}
+li{
+    width:200px;
+    margin:20px;
+   
+}
+ul{
+   
 }
