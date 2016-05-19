@@ -173,3 +173,36 @@ var tree = [
 	parentID: 2,
 	gender: "male"
 }];
+hierarchy = [];
+for (i = 0; i < tree.length; i++)//The function adds to the array hierarchy the persons that are the first in the hierarchy
+{
+    if (!tree[i].parentID)
+        hierarchy.push({ value: tree[i], children: getChildren(tree[i].id) });
+}
+function getChildren(parentID)//The function gets person's id and returns his children as array of objects of: value and children
+{
+    var children = [];
+    for (var i = 0; i < tree.length; i++) {
+        if (tree[i].parentID == parentID)
+            children.push({ value: tree[i], children: getChildren(tree[i].id) });
+    }
+    return children;
+}
+$(document).ready(function () {
+    for (var i = 0; i < hierarchy.length; i++) {
+        showPersonAndChildren(hierarchy[i]);
+    }
+    function showPersonAndChildren(person) {
+        var id = person.value.parentID;
+        if (!id)//For the persons that are the first in the hierarchy
+            id = "list";
+        $("#" + id).append("<li class='" + person.value.gender + "' id='li" + person.value.id + "'>" + person.value.title + "</li>");
+        if (person.children.length > 0)
+            $("#li" + person.value.id).append("<ul id='" + person.value.id + "'></ul>");
+        for (var i = 0; i < person.children.length; i++) {
+            showPersonAndChildren(person.children[i]);
+        }
+
+    }
+
+});

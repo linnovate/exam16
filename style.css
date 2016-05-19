@@ -1,3 +1,23 @@
 body div {
 	color: red;
 }
+.female{
+    color:#DC4AB5;
+}
+.male{
+    color:blue;
+}
+li {
+  text-shadow:1px 1px #DC4AB5,
+              2px 2px #4C4744, 
+              3px 3px #4C4744,
+              4px 4px #4C4744;
+              
+  font-size:x-large;
+
+}
+
+ul{
+    list-style:disc;
+
+}
