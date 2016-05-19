@@ -1,3 +1,13 @@
+
+
+
+//    אך לא הצלחתי לגשת עליהם מתוך התוכנית ע"מ להציגם על הדפדפןDATA הנתונים נכנסו נכון לתוך המערך 
+
+
+
+
+
+
 var tree = [
 {
 	id : 1,
@@ -173,3 +183,112 @@ var tree = [
 	parentID: 2,
 	gender: "male"
 }];
+
+
+var obj = {};
+obj.rootElements = [];
+
+
+function func ()
+{
+    {
+        for (i in tree) {
+            var _elem = tree[i];
+            if (_elem.parentID) {
+                var _parentID = _elem.parentID;
+                if (_parentID == _elem.id) {
+                    // check children, if false - add
+                    if (!_elem.children) {
+                        _elem.children = [];
+                    }
+                    _elem.children.push(_elem);
+                }
+                else {
+                    addChildToParent(_elem, _parentID);
+                }
+            }
+            else // is root
+            {
+                obj.rootElements.push(_elem);
+            }
+
+        }
+    }
+}
+
+
+
+
+function addChildToParent(child, parentID, root) {
+    for (j in tree) {
+        if (tree[j].id.toString() == parentID.toString()) {
+            if (!tree[j].children) {
+                tree[j].children = [];
+            }
+            tree[j].children.push(child);
+        }
+    }
+}
+
+//res.send(obj.rootElements);
+
+function prints()
+{
+    var i = 6;
+    while (i) {
+        var _elem = obj[i];
+        window.alert(obj.rootElements[0].title);
+        i--;
+      
+        obj.rootElements[0]
+    }
+    
+}
+
+
+//נסיונות להצגה על הדפדפן
+
+
+function rec() { recIn(obj.rootElements[0].children); }
+
+///var factorial =
+ 
+function recIn(obj) {
+    //if (obj.rootElements[0].children.title == null) { // terminal case
+    //    (rec(obj.rootElements[0].children));
+    //} else { // block to execute
+    //    window.alert(obj.rootElements[0].title);
+    //}
+
+
+
+
+// simulates operations for walking through tree using iteration
+    var stack = [{
+        depth: 0,
+        element: treeHeadNode
+    }];
+    var stackItem = 0;
+    var current;
+    var children, i, len;
+    var depth;
+    parentElement.depth = 0;
+parentElement.next = null;
+
+
+current = obj.rootElements[0].children;
+last = current;
+
+while (current) {
+    children = current.rootElements[0].children;
+    for (i = 0, len = children.length; i < len; i++) {
+        child = children[i];
+        child.depth = current.depth + 1;
+        child.next = null;
+        //place new item at the tail of the list
+        last.next = child;
+        last = child;
+    }
+    //removes this item from the linked list
+    current = current.next;
+}}
