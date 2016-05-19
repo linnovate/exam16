@@ -173,3 +173,19 @@ var tree = [
 	parentID: 2,
 	gender: "male"
 }];
+var size = 2;
+function func2(parent) {
+    var i = 0;
+    for (i = 0; tree[i]; i++) {
+        if (tree[i].parentID == parent) {
+            {
+               document.getElementById("list").innerHTML += "<li >" + "<h" + size + ">" + tree[i].title +        
+                    "</h" + size + ">" + "</li> ";
+             
+               func2(tree[i].id);
+               
+              
+            }
+        }
+    }
+}
