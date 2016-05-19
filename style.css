@@ -1,3 +1,16 @@
 body div {
 	color: red;
 }
+#b1{
+    background:green;
+}
+#b2{
+    background:red;
+}
+#b3{
+    background:blue;
+}
+p{
+    font-size:30px;
+
+}
