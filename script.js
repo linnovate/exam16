@@ -1,3 +1,7 @@
+
+
+    //console.log( "ready!" );
+
 var tree = [
 {
 	id : 1,
@@ -173,3 +177,107 @@ var tree = [
 	parentID: 2,
 	gender: "male"
 }];
+
+
+//התשובה מתבססת על http://www.jqwidgets.com/building-menu-from-json/
+
+jQuery(document).ready(function ($) {
+    var builddata = function () {
+        var source = [];
+        var items = [];
+        
+        for (i = 0; i < tree.length; i++) {
+            var item = tree[i];
+            var label = item["title"];
+            var parentid = item["parentID"];
+            var id = item["id"];
+            var gender = item["gender"];
+            if (items[parentid]) {
+                var item = { parentid: parentid, label: label , item: item, gender: gender };
+                if (!items[parentid].items) {
+                    items[parentid].items = [];
+                }
+                items[parentid].items[items[parentid].items.length] = item;
+                items[id] = item;
+            }
+            else {
+                items[id] = { parentid: parentid, label: label, item: item,gender:gender };
+                source[id] = items[id];
+            }
+        }
+        return source;
+    }
+    var source = builddata();
+    var buildUL = function (parent, items) {
+        $.each(items, function () {
+            if (this.label) {
+                if (this.gender == "male")
+
+                    var li = $("<li>" + this.label + "     " + this.gender[0] + "</li>").addClass("male shadow");
+                else
+                    var li = $("<li>" + this.label + "     " + this.gender[0] + "</li>").addClass("female shadow");
+
+                li.appendTo(parent);
+
+                if (this.items && this.items.length > 0) {
+                    var ul = $("<ul></ul>");
+                    ul.appendTo(li);
+                    buildUL(ul, this.items);
+                }
+            }
+        });
+    }
+    var ul = $("<ul></ul>");
+    ul.appendTo("#list");
+    buildUL(ul, source);
+
+    var builddata2 = function () {
+        var source = [];
+        var items = [];
+
+        for (i = 0; i < tree.length; i++) {
+            var item = tree[i];
+            var label = item["title"];
+            var parentid = item["parentID"];
+            var id = item["id"];
+            var gender = item["gender"];
+            if (items[parentid]) {
+                var item = { parentid: parentid, label: label, item: item, gender: gender };
+                if (!items[parentid].items) {
+                    items[parentid].items = [];
+                }
+                items[parentid].items[items[parentid].items.length] = item;
+                items[id] = item;
+            }
+            else {
+                items[id] = { parentid: parentid, label: label, item: item, gender: gender };
+                source[id] = items[id];
+            }
+        }
+        return source;
+    }
+    var source = builddata2();
+    var buildUL = function (parent, items) {
+        $.each(items, function () {
+            if (this.label) {
+                if (this.gender == "male")
+
+                    var li = $("<li>" + this.label + "     " + this.gender[0] + "</li>").addClass("male");
+                else
+                    var li = $("<li>" + this.label + "     " + this.gender[0] + "</li>").addClass("female");
+
+                li.appendTo(parent);
+
+                if (this.items && this.items.length > 0) {
+                    var ul = $("<ul></ul>");
+                    ul.appendTo(li);
+                    buildUL(ul, this.items);
+                }
+            }
+        });
+    }
+    var ul = $("<ul></ul>");
+    ul.appendTo("#list");
+    buildUL(ul, source);
+});
+
