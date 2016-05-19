@@ -173,3 +173,99 @@ var tree = [
 	parentID: 2,
 	gender: "male"
 }];
+function onload1() {
+
+   
+
+
+   
+
+    
+
+
+
+
+    var flat = {};
+    for (var i = 0; i < tree.length; i++) {
+        var key = tree[i].id;
+        flat[key] = tree[i];
+    }
+
+    // add child container array to each node
+    for (var i in flat) {
+        flat[i].children = []; // add children container
+    }
+
+    // populate the child container arrays
+    for (var i in flat) {
+        var parentkey = flat[i].parentID;
+        if (flat[parentkey]) {
+            flat[parentkey].children.push(flat[i]);
+        }
+    }
+
+    // find the root nodes (no parent found) and create the hierarchy tree from them
+    var root = [];
+    for (var i in flat) {
+        var parentkey = flat[i].parentID;
+        if (!flat[parentkey]) {
+            root.push(flat[i]);
+        }
+    }
+    console.log("", flat);
+   
+    populate();
+    function populate() {
+        console.log(false);
+        var list = $("<ul>").attr({ id: "person" });
+       
+
+            $.each(root, function (i, person) {
+                var color;
+                if (person.gender == "female")
+                    color = "pink";
+                else
+                    color = "blue";
+                var item = $("<li>").html('<span id=' + person.id + ' style="background-color:' + color + '" >' + person.title +
+                                '</span> ');
+               
+                    checkChild(person.children, person.id,item,color);
+                    console.log(item);
+                    list.append(item);
+                   
+            });
+            $('#list').append(list);
+
+        }
+
+        function checkChild(children, parentid,parent,color) {
+            $.each(children, function (i, person) {
+                
+               if (person.parentID == parentid) {
+                  var children = $('<ul>');
+                  var item = $("<li>").html('<span id=' + person.id + ' style="background-color:' + color + '">' + person.title
+                             + '</span></li>');
+                  if (person.gender == "female")
+                      color = "pink";
+                  else
+                      color = "blue";
+                    children.append(item);
+                    checkChild(person.children, person.id, item,color);
+                   
+
+
+                    parent.append(children);
+                }
+                else
+                    return;
+            });
+        }
+
+        d3.selectAll('div')
+  .on('mouseover', function () {
+      this.style.backgroundColor = 'yellow';
+  })
+
+
+       
+    }
