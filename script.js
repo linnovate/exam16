@@ -1,3 +1,33 @@
+$(document).ready(function () {
+   // $("ul").addClass('alert-danger');
+    var i=0;
+    for (var i = 0; i < tree.length; i++)
+    {
+        $('#list').append(' <li id=' + (i + 1) + '>' + tree[i].title + '</li>');
+        if (tree[i].gender == "male")
+            $('#' + (i + 1)).append(+  +'m')
+        else    $('#' + (i + 1)).append(+  +'f')
+        $('#'+(i+1)).append(' <ul id=' + i + 1 + '>');
+        for (var j = 0; j < tree.length; j++) {
+            if(tree[j].parentID==tree[i].id)
+                $('#' + i + 1).append('<li>' + tree[j].title + '</li>');
+            if (tree[i].gender == "male")
+                $('#' + (i + 1)).append(+  +'m')
+            else $('#' + (i + 1)).append(+  +'f')
+
+        }
+        for (var j = 0; j < tree.length; j++) {
+            $('#' + j + 1).append('</ul>');
+        }
+
+    }
+      // $('#list').append(+ +'</ul>') ;
+}
+);
+
+
+
+
 var tree = [
 {
 	id : 1,
@@ -173,3 +203,4 @@ var tree = [
 	parentID: 2,
 	gender: "male"
 }];
+
