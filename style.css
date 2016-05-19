@@ -1,3 +1,15 @@
 body div {
 	color: red;
+    font-family:'Buxton Sketch';
+    font-size:xx-large;
+}
+.male {
+   color:blue;
+}
+.female {
+   color:fuchsia;
+}
+#list{
+    font-family:'Buxton Sketch';
+    font-size:x-large;
 }
