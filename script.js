@@ -173,3 +173,39 @@ var tree = [
 	parentID: 2,
 	gender: "male"
 }];
+
+$(document).ready(function () {
+    GrandFather = [];
+    for (var i = 0; i < tree.length; i++)//finding all the GrandFathers;
+    {
+        if (!tree[i].parentID) {
+            GrandFather.push({ id: tree[i].id, title: tree[i].title,gender:tree[i].gender, children: [] });
+        }
+
+    }
+    for (var i = 0; i < GrandFather.length; i++) {
+        $("#list").append("<li>" + GrandFather[i].title + " : " + GrandFather[i].gender + "<ul id='" + GrandFather[i].id + "'></ul></li>");
+        GrandFather[i].children = returnChild(GrandFather[i].id);
+
+    }
+    function returnChild(parentID)
+    {
+
+        var children = [];
+        for (var i = 0; i < tree.length; i++) {
+
+            if (tree[i].parentID == parentID)//finding a child;
+            {
+                $("#" + parentID).append("<li>" + tree[i].title +" : "+ tree[i].gender + "<ul id='" + tree[i].id + "'></ul></li>")
+                children.push({ id: tree[i].id, title: tree[i].title, gender: tree[i].gender, children: returnChild(tree[i].id) });
+            }
+        }
+        return children;
+    }
+   
+
+
+    });
+
+
+
