@@ -173,3 +173,168 @@ var tree = [
 	parentID: 2,
 	gender: "male"
 }];
+//tree = unflatten(arr);
+
+//unflatten = function (array, parent, tree) {
+
+//    tree = typeof tree !== 'undefined' ? tree : [];
+//    parent = typeof parent !== 'undefined' ? parent : { id: 0 };
+
+//    var children = _.filter(array, function (child) { return child.parentid == parent.id; });
+
+//    if (!_.isEmpty(children)) {
+//        if (parent.id == 0) {
+//            tree = children;
+//        } else {
+//            parent['children'] = children;
+//        }
+//        _.each(children, function (child) { unflatten(array, child) });
+//    }
+
+//    return tree;
+//}
+
+var fathers = [];
+
+
+$(document).ready(function () {
+
+    //function recursiveIterate($node, array) {
+    //    $node.children().each(function () {
+    //        array.push(this);
+    //        recursiveIterate($(this), array);
+    //    });
+    //}
+    //var a = [];
+    //recursiveIterate($("#list"), tree);
+    //console.log(a);
+
+    //function treeify(tree, idAttr, parentAttr, childrenAttr) {
+    //    if (!idAttr) idAttr = 'id';
+    //    if (!parentAttr) parentAttr = 'parent';
+    //    if (!childrenAttr) childrenAttr = 'children';
+    //    var treeList = [];
+    //    var lookup = {};
+    //    for(var obj in list)
+    //    {
+    //        lookup[obj[idAttr]] = obj;
+    //        obj[childrenAttr] = [];        
+    //    }
+    //    for (var obj in list) {
+    //        if (obj[parentAttr] != null) {
+    //            lookup[obj[parentAttr]][childrenAttr].push(obj);
+    //        } else {
+    //            treeList.push(obj);
+    //        }
+    //    }
+        //list.forEach(function (obj) {
+        //    lookup[obj[idAttr]] = obj;
+        //    obj[childrenAttr] = [];
+        //});
+        //list.forEach(function (obj) {
+        //    if (obj[parentAttr] != null) {
+        //        lookup[obj[parentAttr]][childrenAttr].push(obj);
+        //    } else {
+        //        treeList.push(obj);
+        //    }
+        //});
+    //    return treeList;
+    //};
+    //console.log(JSON.stringify(treeify(list)));
+   
+           var obj;
+       
+        for (var t in tree)
+        {
+            obj = null;
+            if (tree[t].parentID == 0)
+                obj = { my: tree[t], children: [] };
+            if(obj!=null)
+            fathers.push(obj)
+        }
+
+     function ff(pare)
+     {
+         var c = [];
+         for(var d in tree)
+         {
+             if (tree[d].parentID == pare)
+                 c.push(tree[d]);
+         }
+         return c;
+        }
+     for (var e in fathers)
+     {
+         fathers[e].children = [];
+         fathers[e].children = ff(fathers[e].id);
+     }
+    
+  
+    var htmlTxt = "";
+    var cat = [];
+    var htmlStrTxt = "";
+    var url = "#";
+
+    function recurseMenu(parent, level) {
+        htmlStrTxt = '<ul>';
+        for (var x in tree) {
+            if (tree[x].parentId == parent) {
+                if (tree[x].gender == 'female')
+                htmlStrTxt += '<li><ul><span style="background-color:red">' + tree[x].title + '</span>';
+                if (tree[x].gender == 'male')
+                    htmlStrTxt += '<li><ul><span style="background-color:blue">' + tree[x].title + '</span>';
+                for (var n in tree)
+                {
+                    if (tree[n].parentID == tree[x].id) {
+                        if (tree[n].gender == 'female')
+                            htmlStrTxt += '<li><ul><span style="background-color:red">' + tree[n].title + '</span>';
+                        if (tree[n].gender == 'male')
+                            htmlStrTxt += '<li><ul><span style="background-color:blue">' + tree[n].title + '</span>';
+                    }
+                }
+                htmlStrTxt += '</ul>';
+
+                if (tree[x].parentID==0) {
+                   htmlStrTxt += recurseMenu(tree[x].id, level + 1);
+                }
+                htmlStrTxt += '</li>';
+            }
+        }
+        return htmlStrTxt + '</ul>';
+    }
+
+    var htmlTxt = recurseMenu(null, 0);
+    $("#list").html(htmlTxt);
+
+
+    //var array = [];
+
+    //function recursiveIterate(node, array) {
+
+    //    node.children().each(function () {
+    //        array.push(this);
+    //        recursiveIterate((this), array);
+    //    });
+    //}
+    
+    //recursiveIterate(tree, array);
+    //console.log(array);
+    //function parseMenu(ul, tree) {
+    //    for (var i = 0; i < tree.length; i++) {
+    //        var li = $(ul).append('<li><p>' + tree[i].name + '</p></li>');
+    //        if (tree[i].parentID != null) {
+    //            var subul = $('<ul id="submenu' + tree[i].link + '"></ul>');
+    //            $(li).append(subul);
+    //            parseMenu($(subul), menu[i].sub);
+    //        }
+    //    }
+    //}
+
+    //var mylist = $('#list');
+    //parseMenu(mylist, tree);
+
+    //הייתי באמצע ליצור מערך שיעשה את הכינון נכון
+
+
+
+});
